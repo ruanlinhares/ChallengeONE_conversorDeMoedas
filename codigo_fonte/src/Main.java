@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        Conversor conversor = new Conversor();
         String menu = """
                 /////////CONVERSOR DE MOEDAS/////////
                 +-----------------------------------+
@@ -16,11 +15,21 @@ public class Main {
                 | 7. Sair                           |
                 +-----------------------------------+
                 """;
+
+        double moeda;
+        String tipoMoeda;
+
         System.out.println(menu);
-        System.out.println("Digite um valor:");
 
+        System.out.println("Digite um valor para converter: ");
+        moeda = scan.nextDouble();
+        System.out.println("Qual moeda está inserindo: ");
+        tipoMoeda = scan.next();
 
+        Conversor conversor = new Conversor(moeda, tipoMoeda);
 
+        System.out.println(conversor.getValueToConvert());
+        System.out.println(conversor.getCoinForConversion());
 
         scan.close();
     }
