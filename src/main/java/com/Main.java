@@ -1,8 +1,11 @@
+package com;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
+        
+        // textblocs a apartir do java 
         String menu = """
                 /////////CONVERSOR DE MOEDAS/////////
                 +-----------------------------------+
@@ -16,35 +19,35 @@ public class Main {
                 +-----------------------------------+
                 """;
 
-        int opc;
+        //int opc;
         double moeda;
-        String tipoMoeda = "";
+        String tipoMoeda = "BRL";
 
-        do{
-            System.out.println(menu);
+        //do{
+            // System.out.println(menu);
 
-            System.out.println("Qual opção deseja converter? ");
-            opc = scan.nextInt();
+            // System.out.println("Qual opção deseja converter? ");
+            // opc = scan.nextInt();
 
             System.out.println("Digite um valor para converter: ");
             moeda = scan.nextDouble();
             
-            switch(opc){
-                case 1:
-                    tipoMoeda = "BRL";
-                    break;
-                case 7:
-                    break;
-                default:
-                    System.out.println("Opção  de conversão inválida");
-                    break;
-            }
+            // switch(opc){
+            //     case 1:
+            //         tipoMoeda = "BRL";
+            //         break;
+            //     case 7:
+            //         break;
+            //     default:
+            //         System.out.println("Opção  de conversão inválida");
+            //         break;
+            // }
 
             Conversor conversor = new Conversor(moeda, tipoMoeda);
 
             System.out.println(conversor);
 
-        }while(opc != 7);
+        //}while(opc != 7);
 
         System.out.println("Programa encerrado!");
         scan.close();
