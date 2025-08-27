@@ -1,4 +1,4 @@
-package com;
+package com.conversordemoedas.app;
 import com.google.gson.Gson;
 import java.net.URI;
 import java.net.http.HttpClient;

@@ -1,4 +1,6 @@
-package com;
+package com.conversordemoedas.app;
+import com.conversordemoedas.app.Conversor;
+
 import java.util.Scanner;
 
 public class Main {
