@@ -7,18 +7,21 @@ import java.net.http.HttpResponse;
 
 public class Conversor {
     private double valueToConvert;
-    private String coinForConversion;
+    // mudar nome de isertValue
+    private String insertValue, coinForConversion;
 
     public double getValueToConvert(){return this.valueToConvert;}
+    public String getInsertValue() {return insertValue;}
     public String getCoinForConversion(){return this.coinForConversion;}
 
-    public Conversor(double valueToConvert, String cointForConversion){
+    public Conversor(double valueToConvert, String insertValue, String cointForConversion){
         this.valueToConvert = valueToConvert;
         this.coinForConversion = cointForConversion;
-        this.converter(valueToConvert, coinForConversion);
+        this.insertValue = insertValue;
+        this.converter(valueToConvert, coinForConversion, insertValue);
     }
 
-    public double converter(double valueToConvert, String coinForConversion){
+    public double converter(double valueToConvert, String inserValue, String coinForConversion){
 
         // criando um enviador da requisicao (o cliente)
         HttpClient client = HttpClient.newHttpClient();
@@ -54,7 +57,7 @@ public class Conversor {
     @Override
     public String toString() {
         
-        return "Valor: " + valueToConvert + "Moeda Corrente:" + coinForConversion;
+        return "Valor: " + valueToConvert + "\nMoeda Corrente:" + coinForConversion;
     }
 
 
