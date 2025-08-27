@@ -11,11 +11,11 @@ public class Main {
                 /////////CONVERSOR DE MOEDAS/////////
                 +-----------------------------------+
                 | 1. Real Brasileiro                |
-                | 2. Converter para Libra Esterlina |
-                | 3. Converter para Yuan            |
-                | 4. Converter para Peso Argentino  |
-                | 5. Converter para Franco Suíço    |
-                | 6. Converter para Iene            |
+                | 2. Dólar Americano                |
+                | 3. Yuan chinês                    |
+                | 4. Peso Argentino                 |
+                | 5. Libra Esterlina                |
+                | 6. Franco Suíço                   |
                 | 7. Sair                           |
                 +-----------------------------------+
                 """;
@@ -36,9 +36,9 @@ public class Main {
 
         //trocar nome das variaveis para ingles
         int opcMenu1, opcMenu2;
-        double valorParaConversao;
+        double valueForConversion;
         String moedaInserida = "", moedaConvesao = "";
-        String validValues[] = {"BRL", "USD", "CNY", "GBP", "CHF", "ARS"};
+        String[] validValues = {"BRL", "USD", "CNY", "GBP", "CHF", "ARS"};
 
         
 
@@ -54,51 +54,57 @@ public class Main {
                     moedaInserida = "BRL";
                     break;
                 case 2:
-                    moedaInserida = "BRL";
+                    moedaInserida = "USD";
                     break;
                 case 3:
-                    moedaInserida = "BRL";
+                    moedaInserida = "CNY";
                     break;
                 case 4:
-                    moedaInserida = "BRL";
+                    moedaInserida = "ARS";
                     break;
                 case 5:
-                    moedaInserida = "BRL";
+                    moedaInserida = "GBP";
                     break;
                 case 6:
-                    moedaInserida = "BRL";
+                    moedaInserida = "CHF";
                     break;
                 case 7:
                     break;
                 default:
-                    System.out.println("Tipo de moeda não suportada para convesão");
+                    System.out.println("Tipo de moeda não válida para convesão");
                     break;
             }
 
-            System.out.println("Digite um valor para converter: ");
-            valorParaConversao = scan.nextDouble();
-                
-            System.out.println(menu2);
+            for(int i = 0; i < validValues.length; i++){
+                if(moedaInserida.equalsIgnoreCase(validValues[i])){
 
-            System.out.println("Para qual opção deseja converter o valor? ");
-            opcMenu2 = scan.nextInt();
-            
-            switch(opcMenu2){
-                case 1:
-                    moedaConvesao = "BRL";
-                    break;
-                case 7:
-                    break;
-                default:
-                    System.out.println("Opção  de conversão inválida");
-                    break;
+                    System.out.println("Digite um valor para converter: ");
+                    valueForConversion = scan.nextDouble();
+
+                    System.out.println(menu2);
+
+                    System.out.println("Para qual opção deseja converter o valor? ");
+                    opcMenu2 = scan.nextInt();
+
+                    switch(opcMenu2){
+                        case 1:
+                            moedaConvesao = "BRL";
+                            break;
+                        case 7:
+                            break;
+                        default:
+                            System.out.println("Opção  de conversão inválida");
+                            break;
+                    }
+
+                    Conversor conversor = new Conversor(valueForConversion, moedaInserida, moedaConvesao);
+
+                    System.out.println(conversor);
+
+                }
             }
 
-            Conversor conversor = new Conversor(valorParaConversao, moedaInserida, moedaConvesao);
-
-            System.out.println(conversor);
-
-        }while(opcMenu1 != 7 || opcMenu2 != 7 );
+        }while(opcMenu1 != 7 );
 
         System.out.println("Programa encerrado!");
         scan.close();
