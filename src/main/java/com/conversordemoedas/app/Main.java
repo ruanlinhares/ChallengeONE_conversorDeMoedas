@@ -1,5 +1,4 @@
 package com.conversordemoedas.app;
-import com.conversordemoedas.app.Conversor;
 
 import java.util.Scanner;
 
@@ -26,10 +25,10 @@ public class Main {
                 +-----------------------------------+
                 | 1. Converter para Dólar Americano |
                 | 2. Converter para Libra Esterlina |
-                | 3. Converter para Yuan            |
+                | 3. Converter para Yuan  Chinês    |
                 | 4. Converter para Peso Argentino  |
                 | 5. Converter para Franco Suíço    |
-                | 6. Converter para Iene            |
+                | 6. Converter para Real Brasileiro |
                 | 7. Sair                           |
                 +-----------------------------------+
                 """;
@@ -37,7 +36,7 @@ public class Main {
         //trocar nome das variaveis para ingles
         int opcMenu1, opcMenu2;
         double valueForConversion;
-        String moedaInserida = "", moedaConvesao = "";
+        String currencyInput = "", currencyConversion = "";
         String[] validValues = {"BRL", "USD", "CNY", "GBP", "CHF", "ARS"};
 
         
@@ -51,22 +50,22 @@ public class Main {
 
             switch (opcMenu1) {
                 case 1:
-                    moedaInserida = "BRL";
+                    currencyInput = "BRL";
                     break;
                 case 2:
-                    moedaInserida = "USD";
+                    currencyInput = "USD";
                     break;
                 case 3:
-                    moedaInserida = "CNY";
+                    currencyInput = "CNY";
                     break;
                 case 4:
-                    moedaInserida = "ARS";
+                    currencyInput = "ARS";
                     break;
                 case 5:
-                    moedaInserida = "GBP";
+                    currencyInput = "GBP";
                     break;
                 case 6:
-                    moedaInserida = "CHF";
+                    currencyInput = "CHF";
                     break;
                 case 7:
                     break;
@@ -76,7 +75,7 @@ public class Main {
             }
 
             for(int i = 0; i < validValues.length; i++){
-                if(moedaInserida.equalsIgnoreCase(validValues[i])){
+                if(currencyInput.equalsIgnoreCase(validValues[i])){
 
                     System.out.println("Digite um valor para converter: ");
                     valueForConversion = scan.nextDouble();
@@ -88,7 +87,22 @@ public class Main {
 
                     switch(opcMenu2){
                         case 1:
-                            moedaConvesao = "BRL";
+                            currencyConversion = "BRL";
+                            break;
+                         case 2:
+                            currencyConversion = "BRL";
+                            break;
+                         case 3:
+                            currencyConversion = "BRL";
+                            break;
+                         case 4:
+                            currencyConversion = "BRL";
+                            break;
+                         case 5:
+                            currencyConversion = "BRL";
+                            break;
+                         case 6:
+                            currencyConversion = "BRL";
                             break;
                         case 7:
                             break;
@@ -97,7 +111,7 @@ public class Main {
                             break;
                     }
 
-                    Conversor conversor = new Conversor(valueForConversion, moedaInserida, moedaConvesao);
+                    Conversor conversor = new Conversor(valueForConversion, currencyInput, currencyConversion);
 
                     System.out.println(conversor);
 

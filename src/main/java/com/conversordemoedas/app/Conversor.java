@@ -1,27 +1,32 @@
 package com.conversordemoedas.app;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Conversor {
     private double valueToConvert;
     // mudar nome de isertValue
-    private String insertValue, coinForConversion;
+    private String currencyInput, currencyConversion;
 
     public double getValueToConvert(){return this.valueToConvert;}
-    public String getInsertValue() {return insertValue;}
-    public String getCoinForConversion(){return this.coinForConversion;}
+    public String getCurrencyInput() {return this.currencyInput;}
+    public String getCurrencyConversion(){return this.currencyConversion;}
 
-    public Conversor(double valueToConvert, String insertValue, String cointForConversion){
+    public Conversor(double valueToConvert, String currencyInput, String currencyConversion){
         this.valueToConvert = valueToConvert;
-        this.coinForConversion = cointForConversion;
-        this.insertValue = insertValue;
-        this.converter(valueToConvert, coinForConversion, insertValue);
+        this.currencyInput = currencyInput;
+        this.currencyConversion = currencyConversion;
+        this.converter(valueToConvert, currencyConversion, currencyInput);
     }
 
-    public double converter(double valueToConvert, String inserValue, String coinForConversion){
+    public double converter(double valueToConvert, String currencyInput, String currencyConversion){
 
         // criando um enviador da requisicao (o cliente)
         HttpClient client = HttpClient.newHttpClient();
@@ -29,7 +34,7 @@ public class Conversor {
         // criando uma requisicao do tipo get
         HttpRequest request = HttpRequest.newBuilder()
                 //
-                .uri(URI.create("https://v6.exchangerate-api.com/v6/148aecca3bcf9872738966ff/latest/" + coinForConversion))
+                .uri(URI.create("https://v6.exchangerate-api.com/v6/148aecca3bcf9872738966ff/latest/" + currencyInput))
                 //tipo da requiscao (poderia ser update,delete,post)
                 .GET()
                 .build();
@@ -38,12 +43,11 @@ public class Conversor {
             
             // armazenando a resposta enviada pelo cliente
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-
-            System.out.println(response.statusCode());
-            System.out.println(response.body());
             
             if(response.statusCode() == 200){
-                //Gson gson = new Gson();
+                //instanciando um objeto gson
+                Gson gson = new Gson();
+                
             }
 
         }catch(Exception e){
@@ -57,7 +61,7 @@ public class Conversor {
     @Override
     public String toString() {
         
-        return "Valor: " + valueToConvert + "\nMoeda Corrente:" + coinForConversion;
+        return "Valor: " + valueToConvert + "\nMoeda Corrente:" + currencyConversion;
     }
 
 
