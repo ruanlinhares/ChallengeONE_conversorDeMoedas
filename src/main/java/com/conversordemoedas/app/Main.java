@@ -1,12 +1,6 @@
 package com.conversordemoedas.app;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.Scanner;
-
-import com.google.gson.Gson;
 
 public class Main {
     public static void main(String[] args) {
@@ -117,6 +111,8 @@ public class Main {
                     }
 
                     Conversor conversor = new Conversor(valueForConversion, currencyInput, currencyConversion);
+
+                    System.out.println(conversor);
 
 
                 }

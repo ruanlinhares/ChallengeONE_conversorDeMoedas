@@ -4,35 +4,37 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import com.google.gson.Gson;
 
+//possibilidade de usar uma record class
 public class Conversor {
-    private double valueToConvert;
-    private String currencyInput, currencyConversion;
+    private final double valueToConvert;
+    private final String currencyInput, currencyConversion;
 
     public double getValueToConvert(){return this.valueToConvert;}
     public String getCurrencyInput() {return this.currencyInput;}
     public String getCurrencyConversion(){return this.currencyConversion;}
 
+
     public Conversor(double valueToConvert, String currencyInput, String currencyConversion){
         this.valueToConvert = valueToConvert;
         this.currencyInput = currencyInput;
         this.currencyConversion = currencyConversion;
-        this.dataProcessing();
     }
 
-    public void dataProcessing(){
+    public double dataProcessing(double valueToConvert, String currencyInput, String currencyConversion){
+
+        double convertedValue = 0;
+
         // criando um enviador da requisicao (o cliente)
         HttpClient client = HttpClient.newHttpClient();
-        
+
         // criando uma requisicao do tipo get
         HttpRequest request = HttpRequest.newBuilder()
                             .uri(URI.create("https://v6.exchangerate-api.com/v6/148aecca3bcf9872738966ff/latest/" + currencyInput))
-                            //tipo da requiscao (poderia ser update,delete,post)
+                            //tipo da requisicao (poderia ser update,delete,post)
                             .GET()
                             .build();
 
@@ -52,34 +54,34 @@ public class Conversor {
                 Map<String, Double> taxas = taxasResponse.getConversionRates();
 
 
-                // armzenando as chave em um arraylist string
-                List<String> listaMoedas = new ArrayList<>(taxas.keySet());
-                //armazenando os valores em um arraylist double
-                List<Double> listaDeTaxas = new ArrayList<>(taxas.values());
+                //iterando sobre as chaves:valores:
+                for(Map.Entry<String,Double> taxa : taxas.entrySet()){
 
-                //imprimindo chaves
-                for(String moeda : listaMoedas){
-                    System.out.println(moeda);
+                    //verificando se a moeda corrente para conversão existe nas chaves:valor
+                    if(taxa.getKey().equalsIgnoreCase(currencyConversion)){
+
+                        //armazenando valor da chave
+                        double taxaValue = taxa.getValue();
+
+                        //fazendo conversão
+                        convertedValue = taxaValue * valueToConvert;
+
+                    }
                 }
-                //imprimindo valores
-                for(Double taxa : listaDeTaxas){
-                    System.out.println(taxa);
-                }
-                
-                                  
+
             }
 
         }catch(Exception e){
                 e.printStackTrace();
         }
 
-        //System.out.println(conversor);
+        return convertedValue;
     }
     //reescrevendo o metodo para devolver uma representacao em texto do objeto
     @Override
     public String toString() {
-        
-        return "Valor: " + valueToConvert + "\nMoeda Corrente:" + currencyConversion;
+
+        return "Valor inserido: " + valueToConvert + currencyInput + "\nValor Convertido: " + dataProcessing(valueToConvert, currencyInput, currencyConversion) +currencyConversion;
     }
 
 
